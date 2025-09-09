@@ -2,62 +2,72 @@ name: Deploy Project
 on: push
 jobs:
   # Linting job
-  Lint:
+  # Lint:
+  deploy:
     runs-on: ubuntu-latest
     steps:
       - name: Get Code
         uses: actions/checkout@v5
 
-      - name: Install NodeJS
-        uses: actions/setup-node@v5
-        with:
-          node-version: 22
+      # - name: Install NodeJS
+      #   uses: actions/setup-node@v5
+      #   with:
+      #     node-version: 22
 
       - name: Install Dependencies
-        run: npm install
+        run: npm ci
 
       - name: Linting
         run: npm run lint
 
-  # Testing job
-  Test:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Get Code
-        uses: actions/checkout@v5
-
-      - name: Install Node NodeJS
-        uses: actions/setup-node@v5
-        with:
-          node-version: 22
-
-      - name: Install Dependencies
-        run: npm install
-
       - name: Test
         run: npm run test
-
-  # Deploy Job
-  Deploy:
-    needs: [Lint,Test]
-    runs-on: ubuntu-latest
-    steps:
-      - name: Get Code
-        uses: actions/checkout@v5
-
-      - name: Install Node NodeJS
-        uses: actions/setup-node@v5
-        with:
-          node-version: 22
-
-      - name: Install Dependencies
-        run: npm install    
 
       - name: Build Project
         run:  npm run build
 
       - name: Deployment
         run: echo "Deploying ..."
+
+  # Testing job
+  # Test:
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     - name: Get Code
+  #       uses: actions/checkout@v5
+
+  #     - name: Install Node NodeJS
+  #       uses: actions/setup-node@v5
+  #       with:
+  #         node-version: 22
+
+  #     - name: Install Dependencies
+  #       run: npm install
+
+  #     - name: Test
+  #       run: npm run test
+
+  # # Deploy Job
+  # Deploy:
+  #   needs: [Lint,Test]
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     - name: Get Code
+  #       uses: actions/checkout@v5
+
+  #     - name: Install Node NodeJS
+  #       uses: actions/setup-node@v5
+  #       with:
+  #         node-version: 22
+
+  #     - name: Install Dependencies
+  #       run: npm install    
+
+  #     - name: Build Project
+  #       run:  npm run build
+
+  #     - name: Deployment
+  #       run: echo "Deploying ..."
 
 
   
