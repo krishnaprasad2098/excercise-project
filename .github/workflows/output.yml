@@ -1,0 +1,8 @@
+name: Output information
+on: issues
+jobs:
+  issueInfo:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Output Github Context
+        run: echo "${{ github.issues }}"
